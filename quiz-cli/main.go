@@ -11,8 +11,6 @@ import (
 
 var counter int
 
-var wg sync.WaitGroup
-
 func main() {
 
 	problemFile := flag.String("csvfile", "problem.csv", "A csv file that has the question and answers")
@@ -53,7 +51,6 @@ func main() {
 		fmt.Printf("Q%d: %s\n", counter, k)
 
 		go func() {
-			defer wg.Done()
 			for {
 				fmt.Scanf("%s", &ans)
 				FAMap[k] = ans
@@ -70,7 +67,7 @@ func main() {
 	}
 
 	var fScore int
-	for k,_:=range QAMap {
+	for k, _ := range QAMap {
 		if QAMap[k] == FAMap[k] {
 			fScore++
 		}
